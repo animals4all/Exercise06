@@ -11,7 +11,7 @@ def main():
 		try:
 			contentsDict[line[0]] = int(line[1])
 		except ValueError:
-			contentsDict[line[0]] = line[1][:-1]
+			contentsDict[line[0]] = -1
 			
 	for key in sorted(contentsDict):
 		print "Resturant '" + key + "' is rated at " + str(contentsDict[key]) + "."
