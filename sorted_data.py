@@ -1,15 +1,20 @@
 def main():
 	ratings = open("scores.txt", "r")
-	contents = [line.split(":") for line in ratings]
-	contents = {line[0]:line[1] for line in contents}
+	
+	# Create a list of restaurant and rating pairs from the lines in the file
+	contentsList = [line.split(":") for line in ratings]
 
-	items = contents.items()
-	items.sort()
+	# Change 'contentsList' into a dictionary and convert the values to integers,
+	# if a ValueError is raised remove '\n' and add the value as a str
+	contentsDict = {}
+	for line in contentsList:
+		try:
+			contentsDict[line[0]] = int(line[1])
+		except ValueError:
+			contentsDict[line[0]] = line[1][:-1]
+			
+	for key in sorted(contentsDict):
+		print "Resturant '" + key + "' is rated at " + str(contentsDict[key]) + "."
 
-	for item in items:
-		item = list(item)
-
-		print "Resturant '" + item[0] + "' is rated at " + item[1][:-1] + "."
-
-if "__name__" == "__main__":
+if __name__ == "__main__":
 	main()
